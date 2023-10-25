@@ -1,13 +1,22 @@
 ---
 
-- name: Install or uninstall Wazuh Agent.
+- name: Install Wazuh Agent.
   ansible.builtin.apt:
     deb: /tmp/{{ wazuh_agent_package_name }}
-    state: "{{ wazuh_agent_package_state }}"
-    purge: yes
+    state: present
   environment:
     WAZUH_MANAGER: "{{ wazuh_agent_manager_url }}"
     WAZUH_AGENT_GROUP: "{{ wazuh_agent_groups }}" 
     WAZUH_AGENT_NAME: "{{ inventory_hostname }}"
+  when: wazuh_agent_package_state == 'present'
+
+- name: Populate services.
+  ansible.builtin.service_facts:
   notify: Set Wazuh Agent service state
 
+- name: Remove Wazuh Agent.
+  ansible.builtin.apt:
+    name: "{{ wazuh_agent_service_name }}"
+    state: absent
+    purge: yes
+  when: wazuh_agent_service_name in services and wazuh_agent_package_state == 'absent'
