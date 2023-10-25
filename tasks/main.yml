@@ -16,7 +16,6 @@
     url: "{{ wazuh_agent_package_url }}"
     dest: /tmp/{{ wazuh_agent_package_name }}
     checksum: "{{ wazuh_agent_package_checksum }}"
-    owner: "{{ ansible_user }}"
 
 - name: Copy Wazuh Agent installer
   ansible.builtin.copy:
