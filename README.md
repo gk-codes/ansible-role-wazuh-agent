@@ -3,10 +3,22 @@ Ansible Role: Wazuh Agent
 
 This role deploys the Wazuh Agent to Linux servers.
 
+It downloads the installer package files to your Ansible Controller's `/tmp` directory to avoid multiple downloads (one per host). They are removed after the role was applied successfully.
+
 Requirements
 ------------
 
 Wazuh Server to connect the Agent to.
+
+If your target host has no internet connection, you can download the installer files to your Ansible controller:
+
+```bash
+curl -so /tmp/wazuh-agent.rpm https://packages.wazuh.com/4.x/yum/wazuh-agent-4.5.2-1.x86_64.rpm
+```
+
+```bash
+curl -so /tmp/https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.5.2-1_amd64.deb
+```
 
 Role Variables
 --------------
