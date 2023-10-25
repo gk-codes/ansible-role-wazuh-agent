@@ -11,15 +11,16 @@
 
 - name: Download Wazuh Agent installer to the Ansible Controller.
   delegate_to: localhost
+  run_once: true
   become: no
   ansible.builtin.get_url:
     url: "{{ wazuh_agent_package_url }}"
-    dest: /tmp/{{ wazuh_agent_package_name }}
+    dest: "{{ playbook_dir }}/{{ wazuh_agent_package_name }}"
     checksum: "{{ wazuh_agent_package_checksum }}"
 
 - name: Copy Wazuh Agent installer
   ansible.builtin.copy:
-    src: "/tmp/{{ wazuh_agent_package_name }}"
+    src: "{{ playbook_dir }}/{{ wazuh_agent_package_name }}"
     dest: /tmp/{{ wazuh_agent_package_name }}
 
 - include_tasks: setup-{{ ansible_os_family }}.yml
@@ -28,5 +29,5 @@
   delegate_to: localhost
   become: no
   ansible.builtin.file:
-    path: /tmp/{{ wazuh_agent_package_name }}
+    path: "{{ playbook_dir }}/{{ wazuh_agent_package_name }}"
     state: absent
