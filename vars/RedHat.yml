@@ -2,6 +2,6 @@
 
 wazuh_agent_package_url: https://packages.wazuh.com/4.x/yum/wazuh-agent-4.5.2-1.x86_64.rpm
 wazuh_agent_package_name: wazuh-agent.rpm
-wazuh_agent_package_checksum: fa507dee71ee4599b2393420f6d43a7e978f559e6db8987f3ad817ed2924532e
+wazuh_agent_package_checksum: sha256:fa507dee71ee4599b2393420f6d43a7e978f559e6db8987f3ad817ed2924532e
 
 wazuh_agent_service_name: wazuh-agent
