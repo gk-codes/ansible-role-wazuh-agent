@@ -16,3 +16,8 @@
     checksum: "{{ wazuh_agent_package_checksum }}"
 
 - include_tasks: setup-{{ ansible_os_family }}.yml
+
+- name: Remove Wazuh Agent installer.
+  ansible.builtin.file:
+    path: /tmp/{{ wazuh_agent_package_name }}
+    state: absent
