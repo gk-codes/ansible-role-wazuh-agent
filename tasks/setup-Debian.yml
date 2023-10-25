@@ -1,11 +1,13 @@
 ---
 
-- name: Install Wazuh Agent.
+- name: Install or uninstall Wazuh Agent.
   ansible.builtin.apt:
     deb: /tmp/{{ wazuh_agent_package_name }}
-    state: present
+    state: "{{ wazuh_agent_package_state }}"
+    purge: yes
   environment:
     WAZUH_MANAGER: "{{ wazuh_agent_manager_url }}"
     WAZUH_AGENT_GROUP: "{{ wazuh_agent_groups }}" 
     WAZUH_AGENT_NAME: "{{ inventory_hostname }}"
-  notify: Enable and start Wazuh Agent
+  notify: Set Wazuh Agent service state
+

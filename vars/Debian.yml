@@ -5,3 +5,4 @@ wazuh_agent_package_name: wazuh-agent.deb
 wazuh_agent_package_checksum: sha256:1d9db80640d0e1603b5b2460f149c975cb01de2d162f253e02309c368f7925dd
 
 wazuh_agent_service_name: wazuh-agent
+wazuh_agent_configuration_directory: /var/ossec

@@ -3,9 +3,15 @@
 - name: Install Wazuh Agent.
   ansible.builtin.yum:
     name: /tmp/{{ wazuh_agent_package_name }}
-    state: present
+    state: "{{ wazuh_agent_package_state }}"
   environment:
     WAZUH_MANAGER: "{{ wazuh_agent_manager_url }}"
     WAZUH_AGENT_GROUP: "{{ wazuh_agent_groups }}" 
     WAZUH_AGENT_NAME: "{{ inventory_hostname }}"
   notify: Enable and start Wazuh Agent
+
+- name: Remove all files.
+  ansible.builtin.file:
+    path: "{{ wazuh_agent_configuration_directory }}"
+    state: absent
+  when: wazuh_agent_package_state == 'absent'
