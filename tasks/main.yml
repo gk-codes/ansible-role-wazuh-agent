@@ -22,7 +22,6 @@
     src: "/tmp/{{ wazuh_agent_package_name }}"
     dest: /tmp/{{ wazuh_agent_package_name }}
     checksum: "{{ wazuh_agent_package_checksum }}"
-  when: response is failed
 
 - include_tasks: setup-{{ ansible_os_family }}.yml
 
