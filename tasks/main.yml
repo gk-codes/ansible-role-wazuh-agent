@@ -1,0 +1,18 @@
+---
+# tasks file for wazuh-agent
+
+- name: Include OS-specific vars.
+  include_vars: "{{ item }}.yml"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+  tags: vars
+
+- name: Download Wazuh Agent installer.
+  ansible.builtin.get_url:
+    url: "{{ wazuh_agent_package_url }}"
+    dest: /tmp/{{ wazuh_agent_package_name }}
+    checksum: "{{ wazuh_agent_package_checksum }}"
+
+- include_tasks: setup-{{ ansible_os_family }}.yml

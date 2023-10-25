@@ -1,0 +1,10 @@
+---
+# defaults file for wazuh-agent
+
+wazuh_agent_manager_url: 192.168.1.251
+
+# comma-separated string
+wazuh_agent_groups: 'default'
+
+wazuh_agent_service_state: started
+wazuh_agent_service_enabled: yes

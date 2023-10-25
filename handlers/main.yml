@@ -1,0 +1,8 @@
+---
+# handlers file for wazuh-agent
+
+- name: Enable and start Wazuh Agent
+  ansible.builtin.service:
+    name: "{{ wazuh_agent_service_name }}"
+    state: "{{ wazuh_agent_service_state }}"
+    enabled: "{{ wazuh_agent_service_enabled }}"
