@@ -13,6 +13,8 @@ Role Variables
 
 Available variables are listed below, along with default values (see defaults/main.yml):
 
+**ATTENTION:** the Wazuh Agent name will be deducted from the inventory hostname.
+
 `wazuh_agent_groups` corresponds to the Agent groups you have defined in your Wazuh environment. It is a comma-separated string, e.g. `'default,linux,debian'`.
 
 `wazuh_agent_manager_url` is the FQDN or IP address of the Wazuh Manager you want the agent to connect to.
