@@ -9,6 +9,17 @@
     WAZUH_AGENT_GROUP: "{{ wazuh_agent_groups }}" 
     WAZUH_AGENT_NAME: "{{ inventory_hostname }}"
   notify: Enable and start Wazuh Agent
+  when: wazuh_agent_package_state == 'present'
+
+- name: Populate services.
+  ansible.builtin.service_facts:
+  notify: Set Wazuh Agent service state
+
+- name: Remove Wazuh Agent.
+  ansible.builtin.yum:
+    name: "{{ wazuh_agent_service_name }}"
+    state: absent
+  when: wazuh_agent_service_name in services and wazuh_agent_package_state == 'absent'
 
 - name: Remove all files.
   ansible.builtin.file:
