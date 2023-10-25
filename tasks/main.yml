@@ -21,7 +21,6 @@
   ansible.builtin.copy:
     src: "/tmp/{{ wazuh_agent_package_name }}"
     dest: /tmp/{{ wazuh_agent_package_name }}
-    checksum: "{{ wazuh_agent_package_checksum }}"
 
 - include_tasks: setup-{{ ansible_os_family }}.yml
 
