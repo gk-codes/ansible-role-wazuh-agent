@@ -12,8 +12,13 @@
 
 - name: Debian - Populate services.
   ansible.builtin.service_facts:
-  notify: Set Wazuh Agent service state
 
+- name: Set Wazuh Agent service state
+  ansible.builtin.service:
+    name: "{{ wazuh_agent_service_name }}"
+    state: "{{ wazuh_agent_service_state }}"
+    enabled: "{{ wazuh_agent_service_enabled }}"
+  
 - name: Debian - Remove Wazuh Agent.
   ansible.builtin.apt:
     name: "{{ wazuh_agent_service_name }}"
