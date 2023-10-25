@@ -1,6 +1,6 @@
 ---
 
-- name: Install Wazuh Agent.
+- name: RedHat - Install Wazuh Agent.
   ansible.builtin.yum:
     name: /tmp/{{ wazuh_agent_package_name }}
     state: "{{ wazuh_agent_package_state }}"
@@ -11,17 +11,17 @@
   notify: Enable and start Wazuh Agent
   when: wazuh_agent_package_state == 'present'
 
-- name: Populate services.
+- name: RedHat - Populate services.
   ansible.builtin.service_facts:
   notify: Set Wazuh Agent service state
 
-- name: Remove Wazuh Agent.
+- name: RedHat - Remove Wazuh Agent.
   ansible.builtin.yum:
     name: "{{ wazuh_agent_service_name }}"
     state: absent
   when: wazuh_agent_service_name in services and wazuh_agent_package_state == 'absent'
 
-- name: Remove all files.
+- name: RedHat - Remove all files.
   ansible.builtin.file:
     path: "{{ wazuh_agent_configuration_directory }}"
     state: absent

@@ -1,6 +1,6 @@
 ---
 
-- name: Install Wazuh Agent.
+- name: Debian - Install Wazuh Agent.
   ansible.builtin.apt:
     deb: /tmp/{{ wazuh_agent_package_name }}
     state: present
@@ -10,11 +10,11 @@
     WAZUH_AGENT_NAME: "{{ inventory_hostname }}"
   when: wazuh_agent_package_state == 'present'
 
-- name: Populate services.
+- name: Debian - Populate services.
   ansible.builtin.service_facts:
   notify: Set Wazuh Agent service state
 
-- name: Remove Wazuh Agent.
+- name: Debian - Remove Wazuh Agent.
   ansible.builtin.apt:
     name: "{{ wazuh_agent_service_name }}"
     state: absent
